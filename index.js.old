@@ -1,0 +1,35 @@
+const Discord = require("discord.js");
+
+const { prefix , tocken, commend} = require('./config.json') 
+
+const client = new Discord.Client();
+
+client.once("ready" , () => {
+    console.log("ready! ")
+});
+
+client.on("message", (message) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+    
+    if (message.content === `${prefix}help` ) {
+        message.channel.send('Les commende disponible sont :\n/youtube\n/twitch\n/serveur');
+    }
+    else if (message.content === `${prefix}serveur` ) {
+        message.channel.send(`Nom du serveur : ${message.guild.name}\nNombre d'utilisateurs : ${message.guild.memberCount}`);
+    }
+    else if (message.content === `${prefix}youtube`) {
+        message.channel.send("https://www.youtube.com/?gl=FR&hl=fr");
+    }
+    else if (message.content === `${prefix}twitch`) {
+        message.channel.send("⨂NON DISPONIBLE⨂");
+    }
+    else if (message.content === `${prefix}adrien`) {
+        message.channel.send("https://www.youtube.com/channel/UC9yjKmbGG-wyJi4cWobvuKQ")
+    }
+
+});
+
+client.login(tocken);
